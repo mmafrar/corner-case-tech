@@ -1,8 +1,14 @@
 CREATE DATABASE IF NOT EXISTS corner_case_tech;
 
-CREATE TABLE IF NOT EXISTS corner_case_tech.employee (
+CREATE TABLE IF NOT EXISTS corner_case_tech.employee(
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(30) UNIQUE,
     email VARCHAR(50) NOT NULL,
     password VARCHAR(128) NOT NULL
+)ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS corner_case_tech.restaurant(
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30) UNIQUE,
+    telephone VARCHAR(12) NOT NULL
 )ENGINE=INNODB;
