@@ -19,5 +19,10 @@ def upload_menu():
     return MenuService().upload(request.get_json())
 
 
+@app.route("/menu", methods=["GET"])
+def get_menu():
+    return MenuService().get()
+
+
 if __name__ == "__main__":
     app.run(debug=True)

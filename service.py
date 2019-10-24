@@ -23,3 +23,6 @@ class MenuService:
 
     def upload(self, params):
         self.model.upload(params["item"], params["description"], params["restaurant_id"])
+
+    def get(self):
+        return self.model.get()
