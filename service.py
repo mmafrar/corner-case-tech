@@ -1,4 +1,4 @@
-from models import EmployeeModel, RestaurantModel
+from models import EmployeeModel, RestaurantModel, MenuModel
 
 
 class EmployeeService:
@@ -15,3 +15,11 @@ class RestaurantService:
 
     def create(self, params):
         self.model.create(params["name"], params["telephone"])
+
+
+class MenuService:
+    def __init__(self):
+        self.model = MenuModel()
+
+    def upload(self, params):
+        self.model.upload(params["item"], params["description"], params["restaurant_id"])

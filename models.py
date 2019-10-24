@@ -1,4 +1,5 @@
 import pymysql
+from datetime import date
 
 
 class EmployeeModel:
@@ -30,6 +31,26 @@ class RestaurantModel:
 
         try:
             cursor.execute(query, (name, telephone))
+            self.connection.commit()
+            return True
+        except:
+            self.connection.rollback()
+            return False
+        finally:
+            self.connection.close()
+
+
+class MenuModel:
+    def __init__(self):
+        self.connection = pymysql.connect("localhost", "admin", "admin", "corner_case_tech")
+
+    def upload(self, item, description, restaurant_id):
+        cursor = self.connection.cursor()
+        _date = date.today()
+        query = 'INSERT INTO menu (item, description, restaurant_id, _date) values (%s, %s, %s, %s)'
+
+        try:
+            cursor.execute(query, (item, description, restaurant_id, _date))
             self.connection.commit()
             return True
         except:
