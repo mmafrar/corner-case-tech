@@ -6,7 +6,7 @@ class EmployeeService:
         self.model = EmployeeModel()
 
     def create(self, params):
-        self.model.create(params["username"], params["email"], params["password"])
+        return self.model.create(params["username"], params["email"], params["password"])
 
 
 class RestaurantService:
@@ -14,7 +14,7 @@ class RestaurantService:
         self.model = RestaurantModel()
 
     def create(self, params):
-        self.model.create(params["name"], params["telephone"])
+        return self.model.create(params["name"], params["telephone"])
 
 
 class MenuService:
@@ -22,7 +22,7 @@ class MenuService:
         self.model = MenuModel()
 
     def upload(self, params):
-        self.model.upload(params["item"], params["description"], params["restaurant_id"])
+        return self.model.upload(params["item"], params["description"], params["restaurant_id"])
 
     def get(self):
         return self.model.get()

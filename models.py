@@ -1,6 +1,4 @@
-import json
-
-import pymysql
+import json, pymysql
 from datetime import date
 
 
@@ -15,10 +13,10 @@ class EmployeeModel:
         try:
             cursor.execute(query, (username, email, password))
             self.connection.commit()
-            return True
+            return "Success!"
         except:
             self.connection.rollback()
-            return False
+            return "Error!"
         finally:
             self.connection.close()
 
@@ -34,10 +32,10 @@ class RestaurantModel:
         try:
             cursor.execute(query, (name, telephone))
             self.connection.commit()
-            return True
+            return "Success!"
         except:
             self.connection.rollback()
-            return False
+            return "Error!"
         finally:
             self.connection.close()
 
@@ -54,10 +52,10 @@ class MenuModel:
         try:
             cursor.execute(query, (item, description, restaurant_id, _date))
             self.connection.commit()
-            return True
+            return "Success!"
         except:
             self.connection.rollback()
-            return False
+            return "Error!"
         finally:
             self.connection.close()
 
@@ -75,6 +73,6 @@ class MenuModel:
                 json_data.append(dict(zip(row_headers, row)))
             return json.dumps(json_data)
         except:
-            return False
+            return "Error!"
         finally:
             self.connection.close()
