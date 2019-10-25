@@ -1,19 +1,19 @@
-CREATE DATABASE IF NOT EXISTS corner_case_tech;
+CREATE DATABASE IF NOT EXISTS food_menu_voting_app;
 
-CREATE TABLE IF NOT EXISTS corner_case_tech.employee(
+CREATE TABLE IF NOT EXISTS food_menu_voting_app.employee(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(30) UNIQUE,
     email VARCHAR(50) NOT NULL,
     password VARCHAR(128) NOT NULL
 )ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS corner_case_tech.restaurant(
+CREATE TABLE IF NOT EXISTS food_menu_voting_app.restaurant(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30) UNIQUE,
     telephone VARCHAR(12) NOT NULL
 )ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS corner_case_tech.menu(
+CREATE TABLE IF NOT EXISTS food_menu_voting_app.menu(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
     item VARCHAR(30) NOT NULL,
     description TEXT NOT NULL,

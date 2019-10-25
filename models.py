@@ -4,7 +4,7 @@ from datetime import date
 
 class EmployeeModel:
     def __init__(self):
-        self.connection = pymysql.connect("localhost", "admin", "admin", "corner_case_tech")
+        self.connection = pymysql.connect("localhost", "admin", "admin", "food_menu_voting_app")
 
     def create(self, username, email, password):
         cursor = self.connection.cursor()
@@ -23,7 +23,7 @@ class EmployeeModel:
 
 class RestaurantModel:
     def __init__(self):
-        self.connection = pymysql.connect("localhost", "admin", "admin", "corner_case_tech")
+        self.connection = pymysql.connect("localhost", "admin", "admin", "food_menu_voting_app")
 
     def create(self, name, telephone):
         cursor = self.connection.cursor()
@@ -42,7 +42,7 @@ class RestaurantModel:
 
 class MenuModel:
     def __init__(self):
-        self.connection = pymysql.connect("localhost", "admin", "admin", "corner_case_tech")
+        self.connection = pymysql.connect("localhost", "admin", "admin", "food_menu_voting_app")
 
     def upload(self, item, description, restaurant_id):
         cursor = self.connection.cursor()
