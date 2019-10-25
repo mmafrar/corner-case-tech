@@ -29,5 +29,10 @@ def vote():
     return MenuService().vote(request.get_json())
 
 
+@app.route("/menu/results", methods=["GET"])
+def results():
+    return MenuService().results()
+
+
 if __name__ == "__main__":
     app.run(debug=True)

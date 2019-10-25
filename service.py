@@ -29,3 +29,6 @@ class MenuService:
 
     def vote(self, params):
         return self.model.vote(params["menu_id"])
+
+    def results(self):
+        return self.model.results()

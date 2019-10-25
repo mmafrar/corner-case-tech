@@ -90,3 +90,20 @@ class MenuModel:
             return 'Error!'
         finally:
             self.connection.close()
+
+    def results(self):
+        cursor = self.connection.cursor()
+        query = "SELECT id, item, description, votes, restaurant_id FROM menu WHERE _date=%s"
+
+        try:
+            cursor.execute(query, (date.today(),))
+            row_headers = [x[0] for x in cursor.description]
+            result = cursor.fetchall()
+            json_data = []
+            for row in result:
+                json_data.append(dict(zip(row_headers, row)))
+            return json.dumps(json_data)
+        except:
+            return "Error!"
+        finally:
+            self.connection.close()
