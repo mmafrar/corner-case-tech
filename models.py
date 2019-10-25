@@ -2,6 +2,14 @@ import json, pymysql
 from datetime import date
 
 
+def convert_to_json(result, description):
+    row_headers = [x[0] for x in description]
+    json_data = []
+    for row in result:
+        json_data.append(dict(zip(row_headers, row)))
+    return json.dumps(json_data)
+
+
 class EmployeeModel:
     def __init__(self):
         self.connection = pymysql.connect("localhost", "admin", "admin", "food_menu_voting_app")
@@ -66,12 +74,7 @@ class MenuModel:
 
         try:
             cursor.execute(query, (_date,))
-            row_headers = [x[0] for x in cursor.description]
-            result = cursor.fetchall()
-            json_data = []
-            for row in result:
-                json_data.append(dict(zip(row_headers, row)))
-            return json.dumps(json_data)
+            return convert_to_json(cursor.fetchall(), cursor.description)
         except:
             return "Error!"
         finally:
@@ -97,12 +100,7 @@ class MenuModel:
 
         try:
             cursor.execute(query, (date.today(),))
-            row_headers = [x[0] for x in cursor.description]
-            result = cursor.fetchall()
-            json_data = []
-            for row in result:
-                json_data.append(dict(zip(row_headers, row)))
-            return json.dumps(json_data)
+            return convert_to_json(cursor.fetchall(), cursor.description)
         except:
             return "Error!"
         finally:
