@@ -16,7 +16,7 @@ class EmployeeModel:
 
     def create(self, username, email, password):
         cursor = self.connection.cursor()
-        query = 'INSERT INTO employee (username, email, password) values (%s, %s, %s)'
+        query = "INSERT INTO employee (username, email, password) values (%s, %s, %s)"
 
         try:
             cursor.execute(query, (username, email, password))
@@ -35,7 +35,7 @@ class RestaurantModel:
 
     def create(self, name, telephone):
         cursor = self.connection.cursor()
-        query = 'INSERT INTO restaurant (name, telephone) values (%s, %s)'
+        query = "INSERT INTO restaurant (name, telephone) values (%s, %s)"
 
         try:
             cursor.execute(query, (name, telephone))
@@ -54,11 +54,10 @@ class MenuModel:
 
     def upload(self, item, description, restaurant_id):
         cursor = self.connection.cursor()
-        _date = date.today()
-        query = 'INSERT INTO menu (item, description, restaurant_id, _date, votes) values (%s, %s, %s, %s, %s)'
+        query = "INSERT INTO menu (item, description, restaurant_id, _date, votes) values (%s, %s, %s, %s, %s)"
 
         try:
-            cursor.execute(query, (item, description, restaurant_id, _date, '0'))
+            cursor.execute(query, (item, description, restaurant_id, date.today(), "0"))
             self.connection.commit()
             return "Success!"
         except:
@@ -69,28 +68,27 @@ class MenuModel:
 
     def get(self):
         cursor = self.connection.cursor()
-        _date = date.today()
-        query = 'SELECT id, item, description, restaurant_id FROM menu WHERE _date=%s'
+        query = "SELECT id, item, description, restaurant_id FROM menu WHERE _date=%s"
 
         try:
-            cursor.execute(query, (_date,))
+            cursor.execute(query, (date.today(),))
             return convert_to_json(cursor.fetchall(), cursor.description)
         except:
             return "Error!"
         finally:
             self.connection.close()
 
-    def vote(self, menu_id):
+    def vote(self, id):
         cursor = self.connection.cursor()
-        query = 'UPDATE menu set votes=votes+1 WHERE id=%s'
+        query = "UPDATE menu set votes=votes+1 WHERE id=%s"
 
         try:
-            cursor.execute(query, (menu_id,))
+            cursor.execute(query, (id,))
             self.connection.commit()
-            return 'Success!'
+            return "Success!"
         except:
             self.connection.rollback()
-            return 'Error!'
+            return "Error!"
         finally:
             self.connection.close()
 

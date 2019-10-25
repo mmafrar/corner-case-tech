@@ -1,5 +1,6 @@
 CREATE DATABASE IF NOT EXISTS food_menu_voting_app;
 
+
 CREATE TABLE IF NOT EXISTS food_menu_voting_app.employee(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(30) UNIQUE,
@@ -7,11 +8,13 @@ CREATE TABLE IF NOT EXISTS food_menu_voting_app.employee(
     password VARCHAR(128) NOT NULL
 )ENGINE=INNODB;
 
+
 CREATE TABLE IF NOT EXISTS food_menu_voting_app.restaurant(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30) UNIQUE,
     telephone VARCHAR(12) NOT NULL
 )ENGINE=INNODB;
+
 
 CREATE TABLE IF NOT EXISTS food_menu_voting_app.menu(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -22,3 +25,4 @@ CREATE TABLE IF NOT EXISTS food_menu_voting_app.menu(
     _date DATE NOT NULL,
     FOREIGN KEY (restaurant_id) REFERENCES restaurant(id)
 )ENGINE=INNODB;
+

@@ -25,12 +25,12 @@ def get_menu():
 
 
 @app.route("/menu/vote", methods=["POST"])
-def vote():
+def menu_vote():
     return MenuService().vote(request.get_json())
 
 
 @app.route("/menu/results", methods=["GET"])
-def results():
+def menu_results():
     return MenuService().results()
 
 
