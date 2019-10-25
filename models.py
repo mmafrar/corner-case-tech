@@ -47,10 +47,10 @@ class MenuModel:
     def upload(self, item, description, restaurant_id):
         cursor = self.connection.cursor()
         _date = date.today()
-        query = 'INSERT INTO menu (item, description, restaurant_id, _date) values (%s, %s, %s, %s)'
+        query = 'INSERT INTO menu (item, description, restaurant_id, _date, votes) values (%s, %s, %s, %s, %s)'
 
         try:
-            cursor.execute(query, (item, description, restaurant_id, _date))
+            cursor.execute(query, (item, description, restaurant_id, _date, '0'))
             self.connection.commit()
             return "Success!"
         except:
@@ -74,5 +74,19 @@ class MenuModel:
             return json.dumps(json_data)
         except:
             return "Error!"
+        finally:
+            self.connection.close()
+
+    def vote(self, menu_id):
+        cursor = self.connection.cursor()
+        query = 'UPDATE menu set votes=votes+1 WHERE id=%s'
+
+        try:
+            cursor.execute(query, (menu_id,))
+            self.connection.commit()
+            return 'Success!'
+        except:
+            self.connection.rollback()
+            return 'Error!'
         finally:
             self.connection.close()

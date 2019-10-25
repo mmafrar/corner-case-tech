@@ -26,3 +26,6 @@ class MenuService:
 
     def get(self):
         return self.model.get()
+
+    def vote(self, params):
+        return self.model.vote(params["menu_id"])

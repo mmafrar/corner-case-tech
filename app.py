@@ -24,5 +24,10 @@ def get_menu():
     return MenuService().get()
 
 
+@app.route("/menu/vote", methods=["POST"])
+def vote():
+    return MenuService().vote(request.get_json())
+
+
 if __name__ == "__main__":
     app.run(debug=True)

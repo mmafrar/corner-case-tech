@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS corner_case_tech.menu(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
     item VARCHAR(30) NOT NULL,
     description TEXT NOT NULL,
+    votes INTEGER NOT NULL,
     restaurant_id INT(11) NOT NULL,
     _date DATE NOT NULL,
     FOREIGN KEY (restaurant_id) REFERENCES restaurant(id)
