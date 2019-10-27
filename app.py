@@ -1,6 +1,8 @@
 import logging
 from flask import Flask, request
-from service import EmployeeService, RestaurantService, MenuService
+from services.menu import MenuService
+from services.employee import EmployeeService
+from services.restaurant import RestaurantService
 
 
 app = Flask(__name__)
