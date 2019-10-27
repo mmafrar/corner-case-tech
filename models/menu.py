@@ -1,6 +1,6 @@
 import json, logging
 from datetime import date
-from database import Database
+from extras.database import Database
 
 
 def convert_to_json(result, description):
@@ -15,7 +15,8 @@ def convert_to_json(result, description):
 class MenuModel:
     def __init__(self):
         logging.info("Creating MenuModel object")
-        self.connection = Database().get_connection()
+        database = Database()
+        self.connection = database.get_connection()
 
     def upload(self, item, description, restaurant_id):
         logging.info("Calling MenuModel.upload()")

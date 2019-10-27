@@ -1,11 +1,12 @@
 import logging
-from database import Database
+from extras.database import Database
 
 
 class RestaurantModel:
     def __init__(self):
         logging.info("Creating RestaurantModel object")
-        self.connection = Database().get_connection()
+        database = Database()
+        self.connection = database.get_connection()
 
     def create(self, name, telephone):
         logging.info("Calling RestaurantModel.create()")

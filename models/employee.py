@@ -1,11 +1,12 @@
 import logging
-from database import Database
+from extras.database import Database
 
 
 class EmployeeModel:
     def __init__(self):
         logging.info("Creating EmployeeModel object")
-        self.connection = Database.get_connection()
+        database = Database()
+        self.connection = database.get_connection()
 
     def create(self, username, email, password):
         logging.info("Calling EmployeeModel.create()")

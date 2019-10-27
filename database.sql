@@ -1,4 +1,6 @@
-CREATE DATABASE IF NOT EXISTS food_menu_voting_app;
+DROP TABLE IF EXISTS food_menu_voting_app.employee;
+DROP TABLE IF EXISTS food_menu_voting_app.menu;
+DROP TABLE IF EXISTS food_menu_voting_app.restaurant;
 
 
 CREATE TABLE IF NOT EXISTS food_menu_voting_app.employee(
@@ -23,6 +25,5 @@ CREATE TABLE IF NOT EXISTS food_menu_voting_app.menu(
     votes INTEGER NOT NULL,
     restaurant_id INT(11) NOT NULL,
     _date DATE NOT NULL,
-    FOREIGN KEY (restaurant_id) REFERENCES restaurant(id)
+    FOREIGN KEY (restaurant_id) REFERENCES restaurant(id) ON DELETE CASCADE
 )ENGINE=INNODB;
-

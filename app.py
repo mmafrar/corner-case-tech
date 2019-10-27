@@ -1,13 +1,14 @@
 import logging
 from flask import Flask, request
+from config import ApplicationConfig
 from services.menu import MenuService
 from services.employee import EmployeeService
 from services.restaurant import RestaurantService
 
 
 app = Flask(__name__)
-logging.basicConfig(filename="app.log", level=logging.DEBUG,
-                    format="%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s")
+logging.basicConfig(filename=ApplicationConfig.LOG_FILENAME, level=ApplicationConfig.LOG_LEVEL,
+                    format=ApplicationConfig.LOG_FORMAT)
 
 
 @app.route("/employee/create", methods=["POST"])
