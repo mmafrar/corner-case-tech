@@ -1,4 +1,5 @@
 import logging
+from extras.utilities import Utilities
 from models.menu import MenuModel
 
 
@@ -9,16 +10,22 @@ class MenuService:
 
     def upload(self, params):
         logging.info("Calling MenuService.upload()")
-        return self.model.upload(params["item"], params["description"], params["restaurant_id"])
+        self.model.item = params["item"]
+        self.model.description = params["description"]
+        self.model.restaurant_id = params["restaurant_id"]
+        return self.model.upload()
 
     def get(self):
         logging.info("Calling MenuService.get()")
-        return self.model.get()
+        result = self.model.get()
+        return Utilities.convert_to_json(result[0], result[1])
 
     def vote(self, params):
         logging.info("Calling MenuService.vote()")
-        return self.model.vote(params["id"])
+        self.model.id = params["id"]
+        return self.model.vote()
 
     def results(self):
         logging.info("Calling MenuService.results()")
-        return self.model.results()
+        result = self.model.results()
+        return Utilities.convert_to_json(result[0], result[1])

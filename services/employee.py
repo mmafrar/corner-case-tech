@@ -9,4 +9,7 @@ class EmployeeService:
 
     def create(self, params):
         logging.info("Calling EmployeeService.create()")
-        return self.model.create(params["username"], params["email"], params["password"])
+        self.model.username = params["username"]
+        self.model.email = params["email"]
+        self.model.password = params["password"]
+        return self.model.create()

@@ -1,83 +1,86 @@
-import json, logging
+import logging
 from datetime import date
 from extras.database import Database
-
-
-def convert_to_json(result, description):
-    logging.info("Converting the result to JSON")
-    row_headers = [x[0] for x in description]
-    json_data = []
-    for row in result:
-        json_data.append(dict(zip(row_headers, row)))
-    return json.dumps(json_data)
 
 
 class MenuModel:
     def __init__(self):
         logging.info("Creating MenuModel object")
-        database = Database()
-        self.connection = database.get_connection()
+        self.id = None
+        self.item = None
+        self.description = None
+        self.votes = 0
+        self.restaurant_id = None
+        self._date = date.today()
 
-    def upload(self, item, description, restaurant_id):
+    def upload(self):
         logging.info("Calling MenuModel.upload()")
-        cursor = self.connection.cursor()
-        query = "INSERT INTO menu (item, description, restaurant_id, _date, votes) values (%s, %s, %s, %s, %s)"
+        database = Database()
+        connection = database.get_connection()
+        cursor = connection.cursor()
+        query = "INSERT INTO menu (item, description, votes, restaurant_id, _date) values (%s, %s, %s, %s, %s)"
 
         try:
-            cursor.execute(query, (item, description, restaurant_id, date.today(), "0"))
-            self.connection.commit()
+            cursor.execute(query, (self.item, self.description, self.votes, self.restaurant_id, self._date))
+            connection.commit()
             logging.info("Successfully inserted data into Menu table")
             return "Success!"
         except:
-            self.connection.rollback()
+            connection.rollback()
             logging.error("Error occurred while inserting data into Menu table")
             return "Error!"
         finally:
-            self.connection.close()
+            connection.close()
 
     def get(self):
         logging.info("Calling MenuModel.get()")
-        cursor = self.connection.cursor()
+        database = Database()
+        connection = database.get_connection()
+        cursor = connection.cursor()
         query = "SELECT id, item, description, restaurant_id FROM menu WHERE _date=%s"
 
         try:
-            cursor.execute(query, (date.today(),))
+            cursor.execute(query, (self._date,))
             logging.info("Successfully fetched data from Menu table")
-            return convert_to_json(cursor.fetchall(), cursor.description)
+            return cursor.fetchall(), cursor.description
         except:
             logging.error("Error occurred while fetching data from Menu table")
             return "Error!"
         finally:
-            self.connection.close()
+            connection.close()
 
-    def vote(self, id):
+    def vote(self):
         logging.error("Calling MenuModel.vote()")
-        cursor = self.connection.cursor()
+        database = Database()
+        connection = database.get_connection()
+        cursor = connection.cursor()
         query = "UPDATE menu set votes=votes+1 WHERE id=%s"
 
         try:
-            cursor.execute(query, (id,))
-            self.connection.commit()
+            cursor.execute(query, (self.id,))
+            connection.commit()
             logging.info("Successfully updated the votes field in Menu table")
             return "Success!"
         except:
-            self.connection.rollback()
+            connection.rollback()
             logging.error("Error occurred while updating the votes field in Menu table")
             return "Error!"
         finally:
-            self.connection.close()
+            connection.close()
 
     def results(self):
         logging.info("Calling MenuModel.results()")
-        cursor = self.connection.cursor()
+        database = Database()
+        connection = database.get_connection()
+        cursor = connection.cursor()
         query = "SELECT id, item, description, votes, restaurant_id FROM menu WHERE _date=%s"
 
         try:
-            cursor.execute(query, (date.today(),))
+            cursor.execute(query, (self._date,))
             logging.info("Successfully fetched data from Menu table")
-            return convert_to_json(cursor.fetchall(), cursor.description)
+            return cursor.fetchall(), cursor.description
         except:
             logging.error("Error occurred while fetching data from Menu table")
             return "Error!"
         finally:
-            self.connection.close()
+            connection.close()

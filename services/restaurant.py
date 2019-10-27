@@ -9,4 +9,6 @@ class RestaurantService:
 
     def create(self, params):
         logging.info("Calling RestaurantService.create()")
-        return self.model.create(params["name"], params["telephone"])
+        self.model.name = params["name"]
+        self.model.name = params["telephone"]
+        return self.model.create()
