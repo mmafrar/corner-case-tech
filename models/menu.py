@@ -13,6 +13,7 @@ class MenuModel:
         self.restaurant_id = None
         self._date = date.today()
 
+    # Called with data from a Menu object
     def upload(self):
         logging.info("Calling MenuModel.upload()")
         database = Database()
@@ -32,6 +33,7 @@ class MenuModel:
         finally:
             connection.close()
 
+    # Returns the query results of Menu for the day
     def get(self):
         logging.info("Calling MenuModel.get()")
         database = Database()
@@ -49,6 +51,7 @@ class MenuModel:
         finally:
             connection.close()
 
+    # Called when voted with id of the Menu object
     def vote(self):
         logging.error("Calling MenuModel.vote()")
         database = Database()
@@ -68,6 +71,7 @@ class MenuModel:
         finally:
             connection.close()
 
+    # Returns the query result of votes on Menu for the day
     def results(self):
         logging.info("Calling MenuModel.results()")
         database = Database()

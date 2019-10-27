@@ -11,16 +11,18 @@ class Database:
         self.password = DatabaseConfig.DB_PASSWORD
         self.database = DatabaseConfig.DB_NAME
 
+    # Returns a database connection when called from a Database instance
     def get_connection(self):
+        logging.info("Creating a database connection")
         connection = None
         try:
             connection = pymysql.connect(self.host, self.username, self.password, self.database)
             logging.info("Database connection created")
         except:
             logging.error("Error connecting to the database")
-        logging.info("Returning database connection")
         return connection
 
+    # Clear database before executing Test Cases
     def recreate_tables(self):
         logging.info("Calling Database.recreate_tables()")
         connection = self.get_connection()

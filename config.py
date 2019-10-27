@@ -8,7 +8,7 @@ class ApplicationConfig:
     PROJECT_ROOT = "/home/mmafrar/Documents/food-menu-voting-app/"
 
 
-class DatabaseConfig():
+class DatabaseConfig:
     DB_HOST = "localhost"
     DB_USERNAME = "admin"
     DB_PASSWORD = "admin"

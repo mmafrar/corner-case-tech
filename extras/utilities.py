@@ -5,6 +5,7 @@ from config import ApplicationConfig
 
 class Utilities:
 
+    # Reads data from a JSON file
     @staticmethod
     def read_data_file(filename, path):
         file = ApplicationConfig.PROJECT_ROOT + path + filename
@@ -12,6 +13,7 @@ class Utilities:
         with open(file) as data_file:
             return json.load(data_file)
 
+    # Converts a query result to JSON object
     @staticmethod
     def convert_to_json(result, description):
         logging.info("Converting the result to JSON")

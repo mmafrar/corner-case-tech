@@ -8,6 +8,7 @@ class RestaurantModel:
         self.name = None
         self.telephone = None
 
+    # Called with data from a Restaurant object
     def create(self):
         logging.info("Calling RestaurantModel.create()")
         database = Database()

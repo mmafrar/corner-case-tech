@@ -7,6 +7,7 @@ class EmployeeService:
         logging.info("Creating EmployeeService object")
         self.model = EmployeeModel()
 
+    # Calls the method from EmployeeModel with an Employee object
     def create(self, params):
         logging.info("Calling EmployeeService.create()")
         self.model.username = params["username"]

@@ -5,7 +5,7 @@ from services.menu import MenuService
 from services.employee import EmployeeService
 from services.restaurant import RestaurantService
 
-
+# Creates a Flask application with logging parameters
 app = Flask(__name__)
 logging.basicConfig(filename=ApplicationConfig.LOG_FILENAME, level=ApplicationConfig.LOG_LEVEL,
                     format=ApplicationConfig.LOG_FORMAT)
@@ -46,6 +46,6 @@ def menu_results():
     logging.info('Getting results for current day')
     return MenuService().results()
 
-
+# Main entry point into the application
 if __name__ == "__main__":
     app.run(debug=True)

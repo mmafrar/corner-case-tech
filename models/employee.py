@@ -9,6 +9,7 @@ class EmployeeModel:
         self.email = None
         self.username = None
 
+    # Called with data from an Employee object
     def create(self):
         logging.info("Calling EmployeeModel.create()")
         database = Database()
