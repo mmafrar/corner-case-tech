@@ -1,5 +1,6 @@
+import json, logging
 from datetime import date
-import json, pymysql, logging
+from database import Database
 
 
 def convert_to_json(result, description):
@@ -14,7 +15,7 @@ def convert_to_json(result, description):
 class MenuModel:
     def __init__(self):
         logging.info("Creating MenuModel object")
-        self.connection = pymysql.connect("localhost", "admin", "admin", "food_menu_voting_app")
+        self.connection = Database().get_connection()
 
     def upload(self, item, description, restaurant_id):
         logging.info("Calling MenuModel.upload()")

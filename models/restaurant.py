@@ -1,11 +1,11 @@
 import logging
-import pymysql
+from database import Database
 
 
 class RestaurantModel:
     def __init__(self):
         logging.info("Creating RestaurantModel object")
-        self.connection = pymysql.connect("localhost", "admin", "admin", "food_menu_voting_app")
+        self.connection = Database().get_connection()
 
     def create(self, name, telephone):
         logging.info("Calling RestaurantModel.create()")

@@ -1,11 +1,11 @@
 import logging
-import pymysql
+from database import Database
 
 
 class EmployeeModel:
     def __init__(self):
         logging.info("Creating EmployeeModel object")
-        self.connection = pymysql.connect("localhost", "admin", "admin", "food_menu_voting_app")
+        self.connection = Database.get_connection()
 
     def create(self, username, email, password):
         logging.info("Calling EmployeeModel.create()")
